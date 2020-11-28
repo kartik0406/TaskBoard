@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskBoard</title>
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper grey darken-4">
+      <a href="/" class="brand-logo left" style="padding-left: 10px;">TaskBoard</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/"></a></li>
+     
+      </ul>
+    </div>
+  </nav>
+   
+   <%if(today === "Sunday" || today === "Saturday"){%>
+    <div class="box" id="heading">
+        <h1>Weekend schedule</h1>
+    </div>   
+    
+   <% } else{ %>
+    <div class="box" id="heading">
+        <h1>Let's Work Today</h1>
+    </div>  
+    
+   <%}%>
+
+   <div class="box" id="heading">
+    <h1><%=day%></h1>
+   </div>
+   
+    
+    <div class="box">
+        
+       <% if(lists){lists.forEach(function(list){ %>
+        <form action="/delete/<%=listPage%>" method="post">
+         <div class="item">
+           <p>
+           <label>
+            <input type="checkbox" name="checkbox" value="<%=list._id%>" onchange="this.form.submit()">
+            <span><p><%=list.item%></p></span>
+          </label>
+        </p>
+            </form>
+        </div>
+    <%})} %>
+    
+    <form class="item" action="/<%=listPage%>" method="post">
+     <input type="text" name="newTask" placeholder="New Item" autocomplete="off">
+     <button type="submit" name="button">+</button>
+    </form>
+  </div>
+
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
